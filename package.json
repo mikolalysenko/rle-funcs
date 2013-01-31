@@ -1,0 +1,33 @@
+{
+  "name": "rle-funcs",
+  "version": "0.0.0",
+  "description": "Functional programming primitives for narrowband levelsets",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "dependencies": {
+    "rle-core": "~0.0.3",
+    "rle-repair": "~0.0.0",
+    "rle-stencils": "~0.0.1"
+  },
+  "devDependencies": {
+    "rle-mesh": "~0.0.0",
+    "gl-shells": "*",
+    "jquery-browserify": "*"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mikolalysenko/rle-funcs.git"
+  },
+  "keywords": [
+    "rle"
+  ],
+  "author": "Mikola Lysenko",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "gitHead": "17b25693be0250edf05ee6343c15327531cdc718"
+}
