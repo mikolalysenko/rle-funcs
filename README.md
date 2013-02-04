@@ -15,28 +15,30 @@ Or else just include rle-all which has it as a subcomponent:
 Usage
 =====
 
-`apply(volume, stencil, update_func)`
-------------------------------
-This applies a function to the volume pointwise.  Useful for implementing cellular automata and other local differential equations.
+`merge(volumes, stencil, merge_func)`
+----------------------------
+This merges a collection of volumes together.  This acts like a generalized boolean operation amongst the volumes.  It is a very flexible, and very general function
 
-* `volume`: The volume we are applying the stencil operator to.
-* `stencil`: The neighborhood stencil that we are using on the volume.
-* `update_func(phases, distances, retval)`: A function that takes three arguments:
-
-  * `phases`: An array of length `stencil.length` of material phases.
-  * `distances`: An array of length `stencil.length` of distances to the material boundary
+* `volumes`: An array of volumes
+* `stencil`: A stencil
+* `merge_func(phases, distances, retval)`: A function that takes 3 arguments:
+  * `phases`: An array of length `volumes.length * stencil.length` of material phases.
+  * `distances`: An array of length `volumes.length * stencil.length` of distances to the material boundary
   * `retval`: A length two array for the return value of the function.  The first item is the new phase and the second item is the distance to the phase boundary.
 
-Returns: A new run length encoded volume, which is the result of applying `update_func` at every point in the volume.
+Returns:  A new volume which is the result of calling merge_func at every point in the volumes.
 
-`merge(volumes, merge_func)`
-----------------------------
-This merges a collection of volumes together.  This acts like a generalized boolean operation amongst the volumes.
+`mergePoint(volumes, merge_func)`
+---------------------------------
+This is an optimized version of merge where the stencil is a single point.
 
-* `volumes`: An array of volumes:
-* `merge_func(phases, distances, retval)`
+`apply(volume, stencil, merge_func)`
+------------------------------
+This is an optimized version of `merge` that takes only a single volume as input, instead of an array.  Useful for implementing cellular automata and other local differential equations.
 
-Returns:  The result of calling merge_func at every point in the volumes.
+`applyPoint(volume, merge_func)`
+---------------------------------
+Optimized version `apply` that assumes `stencil` is a single point.
 
 
 Credits
