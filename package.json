@@ -1,6 +1,6 @@
 {
   "name": "rle-funcs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Functional programming primitives for narrowband levelsets",
   "main": "index.js",
   "directories": {
