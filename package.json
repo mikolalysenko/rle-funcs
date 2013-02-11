@@ -7,12 +7,12 @@
     "example": "examples"
   },
   "dependencies": {
-    "rle-core": "0.0.*",
-    "rle-repair": "0.0.*",
-    "rle-stencils": "0.0.*"
+    "rle-core": "~0.0",
+    "rle-repair": "~0.0",
+    "rle-stencils": "~0.0"
   },
   "devDependencies": {
-    "rle-mesh": "0.0.*",
+    "rle-mesh": "~0.0",
     "gl-shells": "*",
     "jquery-browserify": "*"
   },
