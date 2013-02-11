@@ -1,6 +1,6 @@
 rle-funcs
 =========
-Functional programming primitives and abstractions for narrowband level sets.  This library gives you tools for combining and iterating over volumes.
+Functional programming primitives and abstractions for the [rle narrowband level set library](https://github.com/mikolalysenko/rle-all).  This library gives you tools for combining and iterating over volumes.
 
 Installation
 ============
@@ -11,6 +11,36 @@ You can install it via rle-funcs:
 Or else just include rle-all which has it as a subcomponent:
 
     npm install rle
+
+
+Example
+=======
+Here is an example showing how to implement the update rule for a 3D version of the Game of Life using narrowband level sets:
+
+    next_state = funcs.apply(state, require("rle-stencils").moore(1), function(phases, distances, retval) {
+      //Count neighbors
+      var neighbors = 0;
+      for(var i=0; i<27; ++i) {
+        if(i !== CENTER_INDEX && phases[i]) {
+          ++neighbors;
+        }
+      }
+      //Compute next state
+      if(phases[CENTER_INDEX]) {
+        if(SURVIVE_LO <= neighbors && neighbors <= SURVIVE_HI) {
+          retval[0] = 1;
+          return;
+        }
+      } else if(BIRTH_LO <= neighbors && neighbors <= BIRTH_HI) {
+        retval[0] = 1;
+        return;
+      }
+      retval[0] = 0;
+      return;
+    });
+
+If you want to see it in the 
+
 
 Usage
 =====

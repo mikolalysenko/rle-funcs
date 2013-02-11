@@ -5,7 +5,7 @@ var saturateAbs       = core.saturateAbs;
 var removeDuplicates  = require("rle-repair").removeDuplicates;
 
 //Most general function: Performs a k-way merge on a collection of volumes
-exports.merge = function(volumes, stencil, merge_func) {
+function merge(volumes, stencil, merge_func) {
   var result      = new core.DynamicVolume()
     , iter        = core.beginMulti(volumes, stencil)
     , coord       = iter.coord
@@ -20,14 +20,17 @@ exports.merge = function(volumes, stencil, merge_func) {
   }
   return removeDuplicates(result);
 }
+exports.merge = merge;
+
 
 //Optimization: merge for a point stencil
-exports.mergePoint = function(volumes, merge_func) {
+function mergePoint(volumes, merge_func) {
   return exports.merge(volumes, new Int32Array(3), merge_func);
 }
+exports.mergePoint = mergePoint;
 
 //Optimization:  merge for a sungle volume
-exports.apply = function(volume, stencil, func) {
+function apply(volume, stencil, func) {
   var result      = new core.DynamicVolume()
     , iter        = core.beginStencil(volume, stencil)
     , coord       = iter.coord
@@ -42,9 +45,10 @@ exports.apply = function(volume, stencil, func) {
   }
   return removeDuplicates(result);
 }
+exports.apply = apply;
 
 //Optimization: apply for a point stencil
-exports.applyPoint = function(volume, func) {
+function applyPoint(volume, func) {
   var nvolume = volume.clone()
     , nruns   = volume.length()
     , retval  = [0,1.0]
@@ -55,4 +59,4 @@ exports.applyPoint = function(volume, func) {
   }
   return removeDuplicates(nvolume);
 }
-
+exports.applyPoint = applyPoint;
