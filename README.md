@@ -51,7 +51,7 @@ Here is an example showing how to implement the update rule for a 3D version of 
 
 If you want to [see it in action, here is a demo](http://mikolalysenko.github.com/rle-core/life3d/index.html).  Other examples of using rle-funcs can be found in [rle-csg](https://github.com/mikolalysenko/rle-csg) and [rle-morphology](https://github.com/mikolalysenko/rle-morphology) which are built on top of this library:
 
-<img src="https://raw.github.com/mikolalysenko/rle-funcs/master/images/life3d.png" width=50% align=center>
+<img src="https://raw.github.com/mikolalysenko/rle-funcs/master/images/life3d.png" width=50%>
 
 
 Usage
