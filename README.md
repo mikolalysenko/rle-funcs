@@ -1,16 +1,12 @@
 rle-funcs
 =========
-Functional programming primitives and abstractions for the [rle narrowband level set library](https://github.com/mikolalysenko/rle-all).  This library gives you tools for combining and iterating over volumes.
+Basic primitives for merging and combining multiphase solid objects.  This is part of the [rle narrowband level set library](https://github.com/mikolalysenko/rle-core).
 
 Installation
 ============
 You can install it via rle-funcs:
 
     npm install rle-funcs
-    
-Or else just include rle-all which has it as a subcomponent:
-
-    npm install rle
 
 
 Example
@@ -39,7 +35,7 @@ Here is an example showing how to implement the update rule for a 3D version of 
       return;
     });
 
-If you want to see it in the 
+If you want to [see it in action, here is a demo](http://mikolalysenko.github.com/rle-core/life3d/index.html).
 
 
 Usage

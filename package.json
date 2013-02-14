@@ -1,6 +1,6 @@
 {
   "name": "rle-funcs",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Functional programming primitives for narrowband levelsets",
   "main": "index.js",
   "directories": {
@@ -12,6 +12,7 @@
     "rle-stencils": "~0.0"
   },
   "devDependencies": {
+    "rle-sample": "~0.0",
     "rle-mesh": "~0.0",
     "gl-shells": "*",
     "jquery-browserify": "*"
