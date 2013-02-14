@@ -1,10 +1,10 @@
 var $         = require("jquery-browserify")
-  , core      = require("rle-core")
+  , sample    = require("rle-sample")
   , mesh      = require("rle-mesh")
   , stencils  = require("rle-stencils")
   , funcs     = require("../../index.js");
 
-var INITIAL_RADIUS  = 16;
+var INITIAL_RADIUS  = 10;
 var CENTER_INDEX    = 1 + 3 + 9;
 var neighborhood    = stencils.moore(1);
 
@@ -15,7 +15,7 @@ var BIRTH_LO        = 5;
 var BIRTH_HI        = 5;
 
 //Initial density
-var INITIAL_DENSITY = 0.2;
+var INITIAL_DENSITY = 0.7;
 
 //Advance game of life one tick
 function step(volume) {
@@ -49,15 +49,15 @@ $(document).ready(function() {
   //Create random table
   var table = new Array(8*INITIAL_RADIUS*INITIAL_RADIUS*INITIAL_RADIUS);
   for(var i=0; i<table.length; ++i) {
-    table[i] = Math.random() < INITIAL_DENSITY ? 1 : 0;
+    table[i] = Math.random() < INITIAL_DENSITY ? 1 : -1;
   }
   //Initialize volume with random stuff
-  var state = core.sample(
-    [-INITIAL_RADIUS,-INITIAL_RADIUS,-INITIAL_RADIUS],
-    [ INITIAL_RADIUS, INITIAL_RADIUS, INITIAL_RADIUS], function(x) {
+  var state = sample.solid.dense(
+    [-INITIAL_RADIUS-1,-INITIAL_RADIUS-1,-INITIAL_RADIUS-1],
+    [ INITIAL_RADIUS+1, INITIAL_RADIUS+1, INITIAL_RADIUS+1], function(x) {
     for(var i=0; i<3; ++i) {
       if(x[i] <= -INITIAL_RADIUS || x[i] >= INITIAL_RADIUS-1) {
-        return -1;
+        return 1;
       }
     }
     var n = x[0] + INITIAL_RADIUS +

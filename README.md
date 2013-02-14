@@ -8,34 +8,48 @@ You can install it via rle-funcs:
 
     npm install rle-funcs
 
-
 Example
 =======
 Here is an example showing how to implement the update rule for a 3D version of the Game of Life using narrowband level sets:
 
-    next_state = funcs.apply(state, require("rle-stencils").moore(1), function(phases, distances, retval) {
-      //Count neighbors
-      var neighbors = 0;
-      for(var i=0; i<27; ++i) {
-        if(i !== CENTER_INDEX && phases[i]) {
-          ++neighbors;
+    //Bounds for birth
+    var SURVIVE_LO      = 4;
+    var SURVIVE_HI      = 5;
+    var BIRTH_LO        = 5;
+    var BIRTH_HI        = 5;
+    
+    //Set up neighborhood stencil
+    var MOORE_1         = require("rle-stencil").moore(1);
+    var CENTER_INDEX    = 13;
+
+    //Compute the next state of the cellular automaton
+    function nextState(state) {
+      return require("rle-funcs").apply(state, MOORE_1, function(phases, distances, retval) {
+        //Count neighbors
+        var neighbors = 0;
+        for(var i=0; i<27; ++i) {
+          if(i !== CENTER_INDEX && phases[i]) {
+            ++neighbors;
+          }
         }
-      }
-      //Compute next state
-      if(phases[CENTER_INDEX]) {
-        if(SURVIVE_LO <= neighbors && neighbors <= SURVIVE_HI) {
+        //Compute next state
+        if(phases[CENTER_INDEX]) {
+          if(SURVIVE_LO <= neighbors && neighbors <= SURVIVE_HI) {
+            retval[0] = 1;
+            return;
+          }
+        } else if(BIRTH_LO <= neighbors && neighbors <= BIRTH_HI) {
           retval[0] = 1;
           return;
         }
-      } else if(BIRTH_LO <= neighbors && neighbors <= BIRTH_HI) {
-        retval[0] = 1;
+        retval[0] = 0;
         return;
-      }
-      retval[0] = 0;
-      return;
-    });
+      });
+    }
+    
+    //Initialize state and tick in your main loop
 
-If you want to [see it in action, here is a demo](http://mikolalysenko.github.com/rle-core/life3d/index.html).
+If you want to [see it in action, here is a demo](http://mikolalysenko.github.com/rle-core/life3d/index.html).  Other examples of using rle-funcs can be found in [rle-csg](https://github.com/mikolalysenko/rle-csg) and [rle-morphology](https://github.com/mikolalysenko/rle-morphology) which are built on top of this library.
 
 
 Usage
